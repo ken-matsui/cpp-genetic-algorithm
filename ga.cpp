@@ -6,9 +6,9 @@ Ga::Ga(unsigned int seed_, const int genum_, const int innum_) : GENE_NUM(genum_
 	// 初期集団の生成と適応度の評価
 	gene.resize(IND_NUM);
 	fitness.resize(GENE_NUM);
-	for(const auto& g : gene | boost::adaptors::indexed()) {
-		g.value().resize(GENE_NUM);
-		std::generate(g.value().begin(), g.value().end(), [this]() { return calcProb(0.5); });
+	for(auto& g : gene) {
+		g.resize(GENE_NUM);
+		std::generate(g.begin(), g.end(), [this]() { return calcProb(0.5); });
 	}
 	// 適応度の更新
 	evaluation();
